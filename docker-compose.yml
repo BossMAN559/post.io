@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  poste-io:
+    image: analogic/poste.io
+    environment:
+      - TZ=${TimeZone}
+      - VIRTUAL_HOST=${VirtualHost}
+      #- HTTPS=OFF
+    ports:
+      - "${interfaceIP}:80:80"
+      - "${interfaceIP}:25:25"
+      - "${interfaceIP}:443:443"
+      - "${interfaceIP}:110:110"
+      - "${interfaceIP}:143:143"
+      - "${interfaceIP}:465:465"
+      - "${interfaceIP}:587:587"
+      - "${interfaceIP}:993:993"
+      - "${interfaceIP}:995:995"
+      - "${interfaceIP}:4190:4190"
+    volumes:
+      - ${StorageLocation}:/data
+    restart: always
+
+networks:
+    frontend:
+     driver: bridge
+     name: ${NetworkName}
